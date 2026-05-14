@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Varun Portfolio</title>
+    
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        /* Enhanced Profile Section */
+        .profile-section {
+            text-align: center;
+            max-width: 300px;
+            margin: 1rem auto 1rem;
+            position: relative;
+            animation: fadeIn 1s ease-out;
+        }
+
+        .hero-container{
+        display: flex;
+        justify-content: flex-start;
+        white-space: nowrap;
+        align-items: center;
+        text-align: left;
+        padding-left: 0;
+        }
+
+        .hero-content{
+        text-align: left;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        margin-left: -5%;
+        }
+
+        .bio-text {
+            font-size: 1.1rem;
+            color: var(--text-gray);
+            margin-bottom: 2.5rem;
+            line-height: 1.6;
+            max-width: 500px;
+            margin-left: 0;
+            margin-right: 0;
+        }
+
+        .hero-image{
+            flex:1;
+            display:flex;
+            justify-content:center;
+        }
+
+        .hero-image img{
+            width:450px;
+            height:450px;
+            margin-right: -10%;
+        }
+            /*About*/
+        .about-container{
+            display:flex;
+            align-items:center;
+            justify-content:space-between;
+            gap:80px;
+            margin-left: 10%;
+            margin-top: 6%;
+        }
+
+        .about-text{
+            flex:1;
+            font-size:18px;
+            line-height:1.7;
+            color:#9ca3af;
+        }
+
+        .about-text h2{
+            font-size:42px;
+            margin-bottom:20px;
+            color:white;
+        }
+        .about-text p{
+            color:white;
+            justify-content: center;
+        }
+
+        .about-image{
+            flex:1;
+            display:flex;
+            justify-content:center;
+            margin-left: 5;
+        }
+
+        .about-image img{
+            width:380px;
+            height:380px;
+            object-fit:cover;
+            border-radius:12px;
+        }
+
+
+        /* SOCIAL BUTTONS */
+
+        .socials{
+            margin-top:30px;
+        }
+
+        .socials a{
+            margin-right:15px;
+            padding:10px 18px;
+            border:1px solid #ffffff;
+            border-radius:30px;
+            text-decoration:none;
+            color:#d1d5db;
+            transition:0.3s;
+            justify-content: center;
+        }
+
+        .socials a:hover{
+            background:#ffffff;
+            color:rgb(0, 0, 0);
+            font-weight: bold;
+            border-color:white;
+        }
+
+
+
+        /* Tree Structure */
+        .founder-tree {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .founder-label {
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--text-white);
+            background: rgba(255, 255, 255, 0.03);
+            padding: 0.6rem 1.2rem;
+            border-radius: 100px;
+            border: 1px solid var(--border-color);
+            z-index: 2;
+            backdrop-filter: blur(5px);
+            transition: all 0.3s ease;
+        }
+
+        .founder-tree:hover .founder-label {
+            border-color: var(--text-white);
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        .trunk {
+            width: 1px;
+            height: 30px;
+            background: var(--border-color);
+            position: relative;
+            transition: background 0.3s, box-shadow 0.3s;
+        }
+
+        .branches {
+            display: flex;
+            justify-content: center;
+            width: 100%;
+            gap: 2rem;
+            position: relative;
+        }
+
+        .branch {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            padding-top: 20px;
+            flex: 1;
+        }
+
+        /* Horizontal Lines */
+        .branch::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            height: 1px;
+            background: var(--border-color);
+            width: 50%;
+            transition: background 0.3s, box-shadow 0.3s;
+        }
+
+        .branch:first-child::before { right: 0; }
+        .branch:last-child::before { left: 0; }
+
+        /* Vertical Lines to Buttons */
+        .branch::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            height: 20px;
+            width: 1px;
+            background: var(--border-color);
+            left: 50%;
+            transform: translateX(-50%);
+            transition: background 0.3s, box-shadow 0.3s;
+        }
+
+        /* Button Styling */
+        .project-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 12px 24px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            color: var(--text-gray);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            min-width: 140px;
+            animation: fadeIn 0.5s ease-out backwards;
+        }
+
+        .branch:first-child .project-btn { animation-delay: 0.2s; }
+        .branch:last-child .project-btn { animation-delay: 0.3s; }
+
+        /* Hover Effects - Light up the path */
+        .project-btn:hover {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: var(--text-white);
+            color: var(--text-white);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+        }
+
+        /* Light up lines on hover */
+        .branch:hover::before,
+        .branch:hover::after {
+            background: var(--text-white);
+            box-shadow: 0 0 8px rgba(255, 255, 255, 0.4);
+        }
+
+        .founder-tree:hover .trunk {
+             background: var(--text-white);
+             box-shadow: 0 0 8px rgba(255, 255, 255, 0.4);
+        }
+    </style>
+    
+</head>
+
+<body>
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <span class="logo-text">Varun Portfolio</span>
+            </div>
+            <ul class="nav-menu">
+                <li class="nav-item"><a href="#home" class="nav-link">Home</a></li>
+                <li class="nav-item"><a href="#about" class="nav-link">About</a></li>
+                <li class="nav-item"><a href="#projects" class="nav-link">Projects</a></li>
+                <li class="nav-item"><a href="#skills" class="nav-link">Skills</a></li>
+                <li class="nav-item"><a href="#contact" class="nav-link">Contact</a></li>
+            </ul>
+            <div class="nav-cta">
+                <a href="Varun Resume.pdf" download="varun.pdf" class="btn-resume"
+                    style="text-decoration: none; display: inline-block;">
+                    Resume
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <section class="hero" id="home">
+        <div class="hero-container ">
+            <div class="hero-content">
+                <span class="hero-tagline">Full Stack Developer</span>
+                <h1 class="hero-title">
+                    Hello, I'm<br>
+                    <span class="block whitespace-nowrap">
+                        Chenikala Venkata Varun Kumar
+                    </span>
+                </h1>
+                <p class="bio-text">
+                  Building responsive and scalable web applications.
+                </p>
+                <div class="hero-buttons">
+                    <button class="btn-primary" onclick="window.location.href='#projects'"><b>View My Work</b></button>
+                    <button class="btn-secondary" onclick="window.location.href='#contact'">Get In Touch</button>
+                </div>
+            </div>
+            <div class="hero-image">
+                <img src="varun.jpeg" alt="Varun">
+            </div>
+        </div>
+    </section>
+    <section class="about" id="about">
+        <div class="about-container">
+            <div class="about-text">
+            <h2>Who I Am</h2>
+            <p>
+                I'm <b>Chenikala Venkata Varun Kumar</b>, a <b>Front-End Developer</b> and 
+                <b>Full Stack Developer</b> passionate about building responsive and scalable 
+                web applications. I enjoy creating modern web experiences using technologies 
+                like React, JavaScript, and Tailwind CSS.
+            </p><br>
+            <p>
+                My focus is on writing clean, efficient code and designing user-friendly 
+                interfaces that deliver smooth and engaging user experiences. I love solving 
+                real-world problems through technology and continuously learning new tools 
+                and frameworks to improve my development skills.
+            </p>
+
+            <div class="socials">
+                <a href="https://github.com/varunkumar177">GitHub</a>
+                <a href="https://www.linkedin.com/in/chenikala-venkata-varun-kumar-758924267/">LinkedIn</a>
+            </div>
+
+            </div>
+
+            <div class="about-image">
+            <img src="image.png" alt="Varun Kumar">
+            </div>
+
+        </div>
+            </section>
+
+    
+    <section class="projects" id="projects">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Projects</h2>
+                <p class="section-subtitle">Showcasing innovation and creativity</p>
+            </div>
+
+            <div class="projects-grid">
+                <div class="project-card" data-category="applications">
+                    <div class="project-image">
+                        <img class="project-icon" src="crop.png" alt="App icon">
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">Crop Recommendation</h3>
+                        <p class="project-description">An intelligent Machine Learning based Crop Recommendation System that helps farmers identify the most suitable crop based on soil nutrients, temperature, humidity, rainfall, and pH values. Designed to improve agricultural productivity and support smart farming decisions.</p>
+                        <div class="project-features">
+                            <ul>
+                                <li>Machine Learning based prediction system.</li>
+                                <li>Analyzes soil and environmental conditions.</li>
+                                <li>Provides accurate crop recommendations.</li>
+                                <li>User-friendly and responsive interface.</li>
+                                <li>Supports smart and sustainable farming.</li>
+                            </ul>
+                        </div>
+                        <a href="" class="btn-outline">View Project</a>
+                    </div>
+                </div>
+
+                <div class="project-card" data-category="websites">
+                    <div class="project-image">
+                        <img class="project-icon" src="fitness.jpeg" alt="App icon">
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">Fitness Tracker</h3>
+                        <p class="project-description">A modern Fitness Tracker web application developed using HTML, CSS, and JavaScript to help users monitor daily fitness activities, track workout progress, calculate calories burned, and maintain a healthy lifestyle through an interactive dashboard.</p>
+                        <div class="project-features">
+                            <ul>
+                                <li>Tracks daily workouts and fitness activities.</li>
+                                <li>Calculates calories burned and progress updates.</li>
+                                <li>Responsive and interactive user interface.</li>
+                                <li>Built using HTML, CSS, and JavaScript.</li>
+                                <li>Simple dashboard for health monitoring.</li>
+                            </ul>
+                        </div>
+                        <a href="" class="btn-outline">View Project</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="skills" id="skills">
+        <div class="container">
+            <div class="section-header"><br><br>
+                <h2 class="section-title">Skills & Technologies</h2>
+                <p class="section-subtitle">Expertise across the development spectrum</p>
+            </div>
+
+            <div class="skills-grid">
+                <div class="skill-item">
+                    <img class="skill-icon-img" src="./html3.png" alt="CSS" >
+                    <span class="skill-name">HTML</span>
+                </div>
+                <div class="skill-item">
+                    <img class="skill-icon-img" src="./text.png" alt="CSS">
+                    <span class="skill-name">CSS</span>
+                </div>
+                <div class="skill-item">
+                    <img class="skill-icon-img" src="./js.png" alt="JavaScript">
+                    <span class="skill-name">JavaScript</span>
+                </div>
+                <div class="skill-item">
+                    <img class="skill-icon-img" src="./physics.png" alt="React">
+                    <span class="skill-name">React</span>
+                </div>
+                <div class="skill-item">
+                    <img class="skill-icon-img" src="./java.png" alt="Java">
+                    <span class="skill-name">Java</span>
+                </div>
+                <div class="skill-item">
+                    <img class="skill-icon-img" src="./mysql-database.png" alt="MySQL">
+                    <span class="skill-name">MySQL</span>
+                </div>
+                <div class="skill-item">
+                    <img class="skill-icon-img" src="./python.png" alt="Python">
+                    <span class="skill-name">Python</span>
+                </div>
+                <div class="skill-item">
+                    <img class="skill-icon-img" src="./workday.jpg" alt="Python">
+                    <span class="skill-name">Workday</span>
+                </div>
+                <div class="skill-item">
+                    <img class="skill-icon-img" src="./coding (1).png" alt="Full Stack">
+                    <span class="skill-name">Full-Stack</span>
+                </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    
+
+    
+
+    <section class="contact" id="contact">
+        <div class="container">
+            <div class="section-header"><br>
+                <h2 class="section-title">Let's Connect</h2>
+                <p class="section-subtitle">Ready to bring your ideas to life</p>
+                <h4>📧 Email : <a href="mailto:varunstyles7@gmail.com">varunstyles7@gmail.com</a></h4>
+            </div>
+            <div class="contact-form-container">
+                    <form class="contact-form" id="contactForm">
+                        <div style="margin-bottom: 1.5rem;">
+                            <input type="text" id="name" name="name" class="form-input" placeholder="Name" required>
+                        </div>
+                        <div style="margin-bottom: 1.5rem;">
+                            <input type="email" id="email" name="email" class="form-input" placeholder="Email" required>
+                        </div>
+                        <div style="margin-bottom: 1.5rem;">
+                            <textarea id="message" name="message" class="form-input" rows="4" placeholder="Message"
+                                required></textarea>
+                        </div>
+                        <button type="submit" class="btn-submit">Send Message</button>
+                    </form>
+                </div>
+        </div>
+    </section>
+
+
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <p>&copy; 2025 Royce Gonsalves. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="app.js"></script>
+</body>
+
+</html>
